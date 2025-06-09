@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+  text-align: center;
+  border-radius: 15%;
+  cursor: pointer;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgb(71, 59, 69);
+  padding: 40px;
+  display: inline-block;
+  color: white;
+}
+
+button {
+  background-color: yellow;
+  font-weight: 900;
+  color: black;
+  margin: 10px 10px;
+  padding: 10px 10px;
+}

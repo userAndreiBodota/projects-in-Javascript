@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Birthday Cake</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      background-color: rgb(184, 139, 99);
+    }
+    #birthday-cake {
+      position: relative;
+      top: 50px;
+      left: 0;
+    }
+
+    #birthday-cake:before {
+      content: "";
+      position: absolute;
+      background-color: #ede0d4;
+      width: 400px;
+      height: 140px;
+      border-radius: 50%;
+      transform: translate(-50%, -10%);
+      box-sizing: inset -2px -5px;
+    }
+
+    .cake {
+      position: absolute;
+      background-color: #ddb892;
+      width: 350px;
+      height: 130px;
+      transform: translate(-50%, -60%);
+    }
+    .cake:before,
+    .cake:after {
+      content: "";
+      position: absolute;
+    }
+    .cake:before,
+    .middle,
+    .middle:before {
+      border-radius: 50% 50% 50% 50%/ 0% 0% 100% 100%;
+      width: 350px;
+      height: 50px;
+    }
+    .cake:before {
+      background-color: #ddb892;
+      top: 130px;
+    }
+    .cake:after {
+      background-color: #b08968;
+      width: 350px;
+      height: 30px;
+      top: 50px;
+    }
+    .middle {
+      position: absolute;
+      background-color: #b08968;
+      top: 80px;
+      z-index: 1;
+    }
+    .middle:before {
+      content: "";
+      position: absolute;
+      background-color: #ddb892;
+      top: -35px;
+    }
+    .top {
+      position: absolute;
+      background-color: #7f5539;
+      width: 350px;
+      height: 90px;
+      border-radius: 50%;
+      z-index: 2;
+      top: -45px;
+      box-shadow: inset -5px -1px #fff,
+        inset -70pxx 2px rgba(255, 255, 255, 0.1);
+    }
+    .chocs {
+      position: absolute;
+      width: 55px;
+      height: 50px;
+      background-color: #7f5539;
+      top: 0;
+      z-index: 1;
+      border-radius: 50% 50% 50% 50%/ 0% 0% 100% 100%;
+      box-shadow: 49px 20px #7f5539, 98px 25px #7f5539, 147px 30px #7f5539,
+        196px 25px #7f5539, 245px 20px #7f5539, 295px 0 #7f5539;
+    }
+    .chocs::before {
+      content: "";
+      position: absolute;
+      width: 175px;
+      height: 180px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 100% 0 100% 0%/0% 72% 28% 100%;
+      left: 175px;
+      top: 0;
+    }
+    .candles {
+      position: absolute;
+      width: 30px;
+      height: 80px;
+      background-color: #0081a7;
+      top: -160px;
+      left: -20px;
+      box-shadow: 50px 20px #0081a7, -50px 20px #0081a7;
+    }
+    .candles:before {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 10px;
+      background-color: #0081a7;
+      border-radius: 50%;
+      top: -5px;
+      box-shadow: 0 80px #0081a7, -50px 20px #0081a7, -50px 100px #0081a7,
+        50px 20px #0081a7, 50px 100px #0081a7, inset 2px -1px #fff;
+    }
+
+    .candles:after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 10px;
+      border-radius: 50%;
+      top: 15px;
+      left: 50px;
+      box-shadow: inset 2px -1px #fff;
+    }
+
+    .shadows {
+      position: absolute;
+      width: 30px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: inset 2px -1px #fff;
+      left: -50px;
+      top: 15px;
+    }
+    .shadows::before {
+      content: "";
+      position: absolute;
+      background-color: #333;
+      width: 1.5px;
+      height: 15px;
+      left: 14.5px;
+      top: -10px;
+      box-shadow: 50px -20px #333, 100px 0 #333;
+    }
+    .shadows::after {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 90px;
+      left: 15px;
+      border-radius: 0% 100% 50% 50% / 100% 6% 10% 0%;
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 50px -20px rgba(255, 255, 255, 0.1),
+        100px 0 rgba(255, 255, 255, 0.1);
+    }
+    .flame,
+    .flame2,
+    .flame3 {
+      width: 30px;
+      height: 30px;
+      transform: rotate(-45deg);
+      z-index: 4;
+      background-color: rgba(252, 191, 73, 0.8);
+      transition: 0.5s;
+      animation: flame 0.5s infinite;
+    }
+    .flame,
+    .flame::before,
+    .flame2,
+    .flame2::before,
+    .flame3,
+    .flame3::before {
+      position: absolute;
+      border-radius: 80% 15% 55% 50%/ 55% 15% 80% 50%;
+    }
+
+    .flame {
+      top: -40px;
+    }
+    .flame2,
+    .flame3 {
+      top: -20px;
+    }
+    .flame2 {
+      left: -50px;
+    }
+    .flame3 {
+      left: 50px;
+    }
+    .flame::before,
+    .flame2::before,
+    .flame3::before {
+      content: "";
+      background-color: rgba(247, 127, 0, 0.4);
+      width: 20px;
+      height: 20px;
+      top: 5px;
+      left: 5px;
+    }
+    .flame.out,
+    .flame2.out,
+    .flame3.out {
+      background-color: rgba(255, 255, 255, 0.1);
+      animation: none;
+    }
+
+    .flame.out::before,
+    .flame2.out::before,
+    .flame3.out::before {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes flame {
+      0%,
+      25%,
+      100% {
+        transform: scaleY(1) rotate(-45deg);
+      }
+      50%,
+      75% {
+        transform: scale(1.1) rotate(-45deg);
+      }
+    }
+    .hbd {
+      color: white;
+      z-index: 9999;
+    }
+  </style>
+  <body>
+    <div id="birthday-cake">
+      <div class="cake">
+        <div class="middle"></div>
+        <div class="chocs"></div>
+        <div class="top"></div>
+      </div>
+      <div class="candles">
+        <div class="flame"></div>
+        <div class="flame2"></div>
+        <div class="flame3"></div>
+        <div class="shadows"></div>
+      </div>
+    </div>
+
+    <script>
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then(function (stream) {
+          const audioContext = new (window.AudioContext ||
+            window.webkitAudioContext)();
+          const microphone = audioContext.createMediaStreamSource(stream);
+          const analyser = audioContext.createAnalyser();
+          microphone.connect(analyser);
+          analyser.fftSize = 256;
+
+          const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+          function detectBlow() {
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+              sum += dataArray[i];
+            }
+            const average = sum / dataArray.length;
+
+            if (average > 50) {
+              blowOutCandles();
+            }
+
+            requestAnimationFrame(detectBlow);
+          }
+
+          detectBlow();
+        })
+        .catch(function (err) {
+          console.error("Error accessing microphone: ", err);
+        });
+
+      function blowOutCandles() {
+        const flames = document.querySelectorAll(".flame, .flame2, .flame3");
+
+        flames.forEach((flame) => {
+          flame.classList.add("out");
+        });
+      }
+    </script>
+  </body>
+</html>

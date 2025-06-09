@@ -1,0 +1,33 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 30px;
+}
+
+button {
+  margin: 0 50px;
+  width: 100px;
+  height: 20px;
+  border: none;
+  padding: 40px 20px;
+  cursor: pointer;
+  color: white;
+}
+
+#green {
+  background-color: green;
+}
+
+#red {
+  background-color: red;
+}
+
+#black {
+  background-color: black;
+}
+
+#random {
+  background-color: rgb(151, 141, 141);
+  border: solid 1px beige;
+}
